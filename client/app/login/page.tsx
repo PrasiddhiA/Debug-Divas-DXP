@@ -25,6 +25,7 @@ export default function LoginPage() {
   }
 
   return (
+
     <div className="flex min-h-screen flex-col">
       <div className="flex min-h-screen flex-col items-center justify-center px-4 sm:px-6">
         <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
