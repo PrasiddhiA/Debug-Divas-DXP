@@ -1,30 +1,46 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import {Login} from "";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Home() {
   return (
-    
-  <div className="flex min-h-screen flex-col">
-      <Login/>
+    <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <Image src="/placeholder.svg?height=32&width=32" alt="Logo" width={32} height={32} className="rounded-lg" />
+            <Image
+              src="/placeholder.svg?height=32&width=32"
+              alt="Logo"
+              width={32}
+              height={32}
+              className="rounded-lg"
+            />
             <span className="text-xl font-bold">ElevateHer</span>
           </div>
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="#features" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link
+              href="#features"
+              className="text-sm font-medium hover:underline underline-offset-4"
+            >
               Features
             </Link>
-            <Link href="#templates" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link
+              href="#templates"
+              className="text-sm font-medium hover:underline underline-offset-4"
+            >
               Templates
             </Link>
-            <Link href="#pricing" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link
+              href="#pricing"
+              className="text-sm font-medium hover:underline underline-offset-4"
+            >
               Pricing
             </Link>
-            <Link href="#testimonials" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link
+              href="#testimonials"
+              className="text-sm font-medium hover:underline underline-offset-4"
+            >
               Testimonials
             </Link>
           </nav>
@@ -50,8 +66,9 @@ export default function Home() {
                     Build Your Online Presence with AI
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    The all-in-one platform for women entrepreneurs to create stunning websites, manage e-commerce, and
-                    grow their business with AI-powered tools.
+                    The all-in-one platform for women entrepreneurs to create
+                    stunning websites, manage e-commerce, and grow their
+                    business with AI-powered tools.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -78,16 +95,22 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+        <section
+          id="features"
+          className="w-full py-12 md:py-24 lg:py-32 bg-muted"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
                   Features
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Everything You Need to Succeed</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Everything You Need to Succeed
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Our platform provides all the tools you need to build and grow your online business, powered by AI.
+                  Our platform provides all the tools you need to build and grow
+                  your online business, powered by AI.
                 </p>
               </div>
             </div>
@@ -115,7 +138,8 @@ export default function Home() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">Drag-and-Drop Builder</h3>
                   <p className="text-muted-foreground">
-                    Create stunning websites with our intuitive drag-and-drop builder. No coding required.
+                    Create stunning websites with our intuitive drag-and-drop
+                    builder. No coding required.
                   </p>
                 </div>
               </div>
@@ -142,7 +166,8 @@ export default function Home() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">AI Content Generation</h3>
                   <p className="text-muted-foreground">
-                    Generate professional content for your business with our AI-powered tools.
+                    Generate professional content for your business with our
+                    AI-powered tools.
                   </p>
                 </div>
               </div>
@@ -167,7 +192,8 @@ export default function Home() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">Business Analytics</h3>
                   <p className="text-muted-foreground">
-                    Track your website performance and customer engagement with detailed analytics.
+                    Track your website performance and customer engagement with
+                    detailed analytics.
                   </p>
                 </div>
               </div>
@@ -179,15 +205,21 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Beautiful Templates</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Beautiful Templates
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Choose from a variety of professionally designed templates to get started quickly.
+                  Choose from a variety of professionally designed templates to
+                  get started quickly.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl gap-8 py-12 md:grid-cols-2 lg:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="group relative overflow-hidden rounded-lg border">
+                <div
+                  key={i}
+                  className="group relative overflow-hidden rounded-lg border"
+                >
                   <Image
                     src={`/placeholder.svg?height=400&width=300&text=Template ${i}`}
                     alt={`Template ${i}`}
@@ -204,11 +236,16 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+        <section
+          id="pricing"
+          className="w-full py-12 md:py-24 lg:py-32 bg-muted"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Simple, Transparent Pricing</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Simple, Transparent Pricing
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Choose the plan that's right for your business.
                 </p>
@@ -284,7 +321,9 @@ export default function Home() {
               <div className="flex flex-col rounded-lg border bg-background p-6 shadow-lg">
                 <div className="space-y-2">
                   <h3 className="text-2xl font-bold">Professional</h3>
-                  <p className="text-muted-foreground">For growing businesses</p>
+                  <p className="text-muted-foreground">
+                    For growing businesses
+                  </p>
                 </div>
                 <div className="mt-4 flex items-baseline">
                   <span className="text-4xl font-bold">$49</span>
@@ -455,9 +494,12 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">What Our Users Say</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  What Our Users Say
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Hear from women entrepreneurs who have transformed their businesses with our platform.
+                  Hear from women entrepreneurs who have transformed their
+                  businesses with our platform.
                 </p>
               </div>
             </div>
@@ -482,15 +524,22 @@ export default function Home() {
                     "The e-commerce features have been a game-changer for my bakery. My sales have increased by 40% since joining ElevateHer.",
                 },
               ].map((testimonial, i) => (
-                <div key={i} className="flex flex-col rounded-lg border bg-background p-6">
+                <div
+                  key={i}
+                  className="flex flex-col rounded-lg border bg-background p-6"
+                >
                   <div className="flex items-center space-x-4">
                     <div className="h-12 w-12 rounded-full bg-muted" />
                     <div>
                       <h3 className="text-lg font-bold">{testimonial.name}</h3>
-                      <p className="text-sm text-muted-foreground">{testimonial.business}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonial.business}
+                      </p>
                     </div>
                   </div>
-                  <p className="mt-4 text-muted-foreground">{testimonial.quote}</p>
+                  <p className="mt-4 text-muted-foreground">
+                    {testimonial.quote}
+                  </p>
                 </div>
               ))}
             </div>
@@ -501,9 +550,12 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Ready to Get Started?</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Ready to Get Started?
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Join thousands of women entrepreneurs who are building their online presence with ElevateHer.
+                  Join thousands of women entrepreneurs who are building their
+                  online presence with ElevateHer.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -528,19 +580,27 @@ export default function Home() {
             © 2023 ElevateHer. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link
+              href="#"
+              className="text-sm font-medium hover:underline underline-offset-4"
+            >
               Terms of Service
             </Link>
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link
+              href="#"
+              className="text-sm font-medium hover:underline underline-offset-4"
+            >
               Privacy Policy
             </Link>
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link
+              href="#"
+              className="text-sm font-medium hover:underline underline-offset-4"
+            >
               Contact Us
             </Link>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
-
