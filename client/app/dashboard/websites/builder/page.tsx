@@ -14,12 +14,47 @@ import { ElementRenderer } from "./components/element-renderer"
 import { v4 as uuidv4 } from "uuid"
 import { toast } from "@/components/ui/use-toast"
 
+type ElementProperties = {
+  x: number
+  y: number
+  text?: string
+  src?: string
+  alt?: string
+  url?: string
+  code?: string
+  items?: string[]
+  phone?: string
+  email?: string
+  address?: string
+  title?: string
+  description?: string
+  name?: string
+  bio?: string
+  variant?: string
+  size?: string
+  author?: string
+  language?: string
+  videoUrl?: string
+  mapUrl?: string
+  color?: string
+  backgroundColor?: string
+}
+
+type Element = {
+  id: string
+  type: string
+  name: string
+  visible: boolean
+  locked: boolean
+  properties: ElementProperties
+}
+
 export default function WebsiteBuilderPage() {
   const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop")
   const [activeTab, setActiveTab] = useState("elements")
-  const [elements, setElements] = useState<Array<any>>([])
-  const [selectedElement, setSelectedElement] = useState<any>(null)
-  const [history, setHistory] = useState<Array<Array<any>>>([])
+  const [elements, setElements] = useState<Element[]>([])
+  const [selectedElement, setSelectedElement] = useState<Element | null>(null)
+  const [history, setHistory] = useState<Element[][]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [draggedElement, setDraggedElement] = useState<string | null>(null)
   const [isPreviewMode, setIsPreviewMode] = useState(false)
@@ -27,14 +62,14 @@ export default function WebsiteBuilderPage() {
 
   // Initialize with empty state
   useEffect(() => {
-    const initialElements: any[] = []
+    const initialElements: Element[] = []
     setElements(initialElements)
     setHistory([initialElements])
     setHistoryIndex(0)
   }, [])
 
   // Save state to history when elements change
-  const saveToHistory = (newElements: Array<any>) => {
+  const saveToHistory = (newElements: Element[]) => {
     const newHistory = history.slice(0, historyIndex + 1)
     newHistory.push(newElements)
     setHistory(newHistory)
@@ -75,7 +110,7 @@ export default function WebsiteBuilderPage() {
     const y = e.clientY - rect.top
 
     // Create new element based on type
-    const newElement = {
+    const newElement: Element = {
       id: uuidv4(),
       type: draggedElement,
       name: `${draggedElement.charAt(0).toUpperCase() + draggedElement.slice(1)} ${elements.length + 1}`,
@@ -156,7 +191,7 @@ export default function WebsiteBuilderPage() {
   }
 
   // Handle element selection
-  const handleElementSelect = (element: any) => {
+  const handleElementSelect = (element: Element) => {
     if (isPreviewMode) return
     setSelectedElement(element)
     setActiveTab("settings")
@@ -169,7 +204,7 @@ export default function WebsiteBuilderPage() {
   }
 
   // Handle element update
-  const handleUpdateElement = (id: string, properties: Record<string, any>) => {
+  const handleUpdateElement = (id: string, properties: Partial<ElementProperties>) => {
     const newElements = elements.map((element) =>
       element.id === id ? { ...element, properties: { ...element.properties, ...properties } } : element,
     )
@@ -211,7 +246,7 @@ export default function WebsiteBuilderPage() {
     const elementToDuplicate = elements.find((element) => element.id === id)
     if (!elementToDuplicate) return
 
-    const newElement = {
+    const newElement: Element = {
       ...elementToDuplicate,
       id: uuidv4(),
       name: `${elementToDuplicate.name} (Copy)`,
@@ -261,7 +296,7 @@ export default function WebsiteBuilderPage() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
-    a.download = "website-data.json"
+    a.download = "website-elements.json"
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -276,7 +311,7 @@ export default function WebsiteBuilderPage() {
   const handleImport = () => {
     const input = document.createElement("input")
     input.type = "file"
-    input.accept = "application/json"
+    input.accept = ".json"
     input.onchange = (e) => {
       const file = (e.target as HTMLInputElement).files?.[0]
       if (!file) return
@@ -400,6 +435,12 @@ export default function WebsiteBuilderPage() {
             <Save className="mr-2 h-4 w-4" />
             Save
           </Button>
+          <Link href="/dashboard/websites/builder/content">
+            <Button>
+              Next
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </div>
       <div className={`grid flex-1 ${isPreviewMode ? "" : "grid-cols-[300px_1fr]"}`}>
@@ -414,9 +455,15 @@ export default function WebsiteBuilderPage() {
               <TabsContent value="elements" className="p-4 overflow-auto h-[calc(100vh-8rem)]">
                 <ElementPanel onDragStart={handleDragStart} />
               </TabsContent>
-              <TabsContent value="layers" className="p-4 overflow-auto h-[calc(100vh-8rem)]">
+              <TabsContent value="layers" className="m-0 h-full border-0">
                 <LayersPanel
-                  layers={elements}
+                  layers={elements.map(element => ({
+                    id: element.id,
+                    name: element.name,
+                    type: element.type,
+                    visible: element.visible,
+                    locked: element.locked
+                  }))}
                   onToggleVisibility={handleToggleVisibility}
                   onToggleLock={handleToggleLock}
                   onDeleteLayer={handleDeleteElement}
@@ -424,8 +471,11 @@ export default function WebsiteBuilderPage() {
                   onMoveLayer={handleMoveLayer}
                 />
               </TabsContent>
-              <TabsContent value="settings" className="p-4 overflow-auto h-[calc(100vh-8rem)]">
-                <SettingsPanel selectedElement={selectedElement} onUpdateElement={handleUpdateElement} />
+              <TabsContent value="settings" className="m-0 h-full border-0">
+                <SettingsPanel
+                  selectedElement={selectedElement}
+                  onUpdateElement={handleUpdateElement}
+                />
               </TabsContent>
             </Tabs>
           </div>

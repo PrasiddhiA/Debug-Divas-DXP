@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,47 +8,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, Upload, X } from "lucide-react"
+import { ArrowLeft, Edit, Package } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-export default function NewProductPage() {
-  const [images, setImages] = useState<string[]>([])
-  const [productName, setProductName] = useState("")
-  const [price, setPrice] = useState("")
-  const [description, setDescription] = useState("")
-  const fileInputRef = useRef<HTMLInputElement>(null)
-
-  const handleImageUpload = () => {
-    fileInputRef.current?.click()
-  }
-
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files
-    if (!files) return
-
-    // Convert FileList to Array and create URLs for preview
-    const newImages = Array.from(files).map(file => URL.createObjectURL(file))
-    setImages(prevImages => [...prevImages, ...newImages])
-  }
-
-  const handleRemoveImage = (index: number) => {
-    const newImages = [...images]
-    // Revoke the object URL to prevent memory leaks
-    URL.revokeObjectURL(newImages[index])
-    newImages.splice(index, 1)
-    setImages(newImages)
-  }
-
-  // Cleanup object URLs when component unmounts
-  const cleanup = () => {
-    images.forEach(image => URL.revokeObjectURL(image))
-  }
-
-  // Add cleanup on component unmount
-  useEffect(() => {
-    return cleanup
-  }, [images])
+export default function ProductDetailsPage({ params }: { params: { id: string } }) {
+  // In a real app, you would fetch the product data using the ID
+  const productId = params.id
 
   return (
     <div className="flex flex-col gap-6">
@@ -60,8 +25,8 @@ export default function NewProductPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Add New Product</h1>
-          <p className="text-muted-foreground">Create a new product for your store.</p>
+          <h1 className="text-3xl font-bold tracking-tight">Product Details</h1>
+          <p className="text-muted-foreground">View and manage product information.</p>
         </div>
       </div>
 
@@ -86,8 +51,7 @@ export default function NewProductPage() {
                 <Input
                   id="product-name"
                   placeholder="Enter product name"
-                  value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
+                  defaultValue="Handcrafted Product"
                 />
               </div>
 
@@ -97,16 +61,15 @@ export default function NewProductPage() {
                   id="product-description"
                   placeholder="Describe your product..."
                   rows={5}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  defaultValue="This is a beautiful handcrafted product made with care and attention to detail."
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="product-category">Category</Label>
-                <Select>
+                <Select defaultValue="jewelry">
                   <SelectTrigger id="product-category">
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="jewelry">Jewelry</SelectItem>
@@ -120,7 +83,7 @@ export default function NewProductPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="product-tags">Tags</Label>
-                <Input id="product-tags" placeholder="handmade, sustainable, eco-friendly" />
+                <Input id="product-tags" defaultValue="handmade, sustainable, eco-friendly" />
                 <p className="text-xs text-muted-foreground">Separate tags with commas</p>
               </div>
             </CardContent>
@@ -131,44 +94,18 @@ export default function NewProductPage() {
           <Card>
             <CardHeader>
               <CardTitle>Product Images</CardTitle>
-              <CardDescription>Upload images of your product.</CardDescription>
+              <CardDescription>Manage your product images.</CardDescription>
             </CardHeader>
             <CardContent>
-              <input
-                type="file"
-                ref={fileInputRef}
-                className="hidden"
-                accept="image/*"
-                multiple
-                onChange={handleFileSelect}
-              />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                {images.map((image, index) => (
-                  <div key={index} className="relative rounded-lg border overflow-hidden">
-                    <Image
-                      src={image}
-                      alt={`Product image ${index + 1}`}
-                      width={200}
-                      height={200}
-                      className="w-full aspect-square object-cover"
-                    />
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      className="absolute top-2 right-2 h-6 w-6 rounded-full"
-                      onClick={() => handleRemoveImage(index)}
-                    >
-                      <X className="h-3 w-3" />
-                    </Button>
-                  </div>
-                ))}
-                <div
-                  className="flex flex-col items-center justify-center rounded-lg border border-dashed p-4 cursor-pointer hover:bg-muted/50"
-                  onClick={handleImageUpload}
-                >
-                  <Upload className="h-8 w-8 text-muted-foreground mb-2" />
-                  <p className="text-sm font-medium">Upload Image</p>
-                  <p className="text-xs text-muted-foreground">PNG, JPG up to 5MB</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="relative rounded-lg border overflow-hidden">
+                  <Image
+                    src={`/placeholder.svg?height=200&width=200&text=Product ${productId}`}
+                    alt="Product image"
+                    width={200}
+                    height={200}
+                    className="w-full aspect-square object-cover"
+                  />
                 </div>
               </div>
             </CardContent>
@@ -179,7 +116,7 @@ export default function NewProductPage() {
           <Card>
             <CardHeader>
               <CardTitle>Pricing Information</CardTitle>
-              <CardDescription>Set the price for your product.</CardDescription>
+              <CardDescription>Manage your product pricing.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
@@ -191,8 +128,7 @@ export default function NewProductPage() {
                     type="number"
                     placeholder="0.00"
                     className="rounded-l-none"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    defaultValue="99.99"
                   />
                 </div>
               </div>
@@ -234,17 +170,17 @@ export default function NewProductPage() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="sku">SKU (Stock Keeping Unit)</Label>
-                <Input id="sku" placeholder="SKU-123" />
+                <Input id="sku" defaultValue="SKU-123" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="barcode">Barcode (ISBN, UPC, GTIN, etc.)</Label>
-                <Input id="barcode" placeholder="123456789" />
+                <Input id="barcode" defaultValue="123456789" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="quantity">Quantity</Label>
-                <Input id="quantity" type="number" placeholder="0" />
+                <Input id="quantity" type="number" defaultValue="10" />
               </div>
 
               <div className="flex items-center space-x-2">
@@ -321,10 +257,9 @@ export default function NewProductPage() {
       </Tabs>
 
       <div className="flex justify-end gap-4">
-        <Button variant="outline">Save as Draft</Button>
-        <Button>Publish Product</Button>
+        <Button variant="outline">Save Changes</Button>
+        <Button>Update Product</Button>
       </div>
     </div>
   )
-}
-
+} 

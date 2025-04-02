@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Globe, ShoppingCart, FileText } from "lucide-react"
+import { Globe, ShoppingCart, FileText, Users } from "lucide-react"
 
 export function DashboardNav() {
   const pathname = usePathname()
@@ -19,6 +19,12 @@ export function DashboardNav() {
       href: "/dashboard/store",
       icon: ShoppingCart,
       active: pathname?.startsWith("/dashboard/store"),
+    },
+    {
+      name: "Community",
+      href: "/dashboard/community",
+      icon: Users,
+      active: pathname?.startsWith("/dashboard/community"),
     },
     {
       name: "Resources",

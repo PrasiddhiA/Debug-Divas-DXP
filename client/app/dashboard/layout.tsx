@@ -57,7 +57,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   height={32}
                   className="rounded-lg"
                 />
-                <span>EmpowerHub</span>
+                <span>ElevateHer</span>
               </Link>
               <nav className="grid gap-4 text-sm">
                 <Link
@@ -162,7 +162,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </Sheet>
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold md:text-lg">
           <Image src="/placeholder.svg?height=32&width=32" alt="Logo" width={32} height={32} className="rounded-lg" />
-          <span className="hidden md:inline">EmpowerHub</span>
+          <span className="hidden md:inline">ElevateHer</span>
         </Link>
 
         {/* Add the navigation bar here */}

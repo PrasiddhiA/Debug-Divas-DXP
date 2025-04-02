@@ -15,7 +15,26 @@ interface SettingsPanelProps {
   selectedElement: {
     id: string
     type: string
-    properties: Record<string, any>
+    name: string
+    visible: boolean
+    locked: boolean
+    properties: {
+      x: number
+      y: number
+      text?: string
+      src?: string
+      alt?: string
+      url?: string
+      code?: string
+      items?: string[]
+      phone?: string
+      email?: string
+      address?: string
+      title?: string
+      description?: string
+      name?: string
+      bio?: string
+    }
   } | null
   onUpdateElement: (id: string, properties: Record<string, any>) => void
 }
