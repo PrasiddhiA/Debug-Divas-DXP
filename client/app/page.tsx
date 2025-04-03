@@ -6,52 +6,54 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
+      <header className="sticky top-0 z-50 w-full bg-[#341539]">
+        <div className="container flex h-20 items-center justify-between px-4 md:px-6">
+          <div className="flex items-center gap-3">
             <Image
-              src="/placeholder.svg?height=32&width=32"
+              src="/Elevateher.jpg"
               alt="Logo"
-              width={32}
-              height={32}
+              width={40}
+              height={40}
               className="rounded-lg"
             />
-            <span className="text-xl font-bold">ElevateHer</span>
+            <span className="text-2xl font-bold text-white">ElevateHer</span>
           </div>
-          <nav className="hidden md:flex items-center gap-6">
+          <div className="flex items-center gap-8">
             <Link
               href="#features"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-base font-medium text-white hover:text-white/80 transition-colors"
             >
               Features
             </Link>
             <Link
               href="#templates"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-base font-medium text-white hover:text-white/80 transition-colors"
             >
               Templates
             </Link>
             <Link
               href="#pricing"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-base font-medium text-white hover:text-white/80 transition-colors"
             >
               Pricing
             </Link>
             <Link
               href="#testimonials"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-base font-medium text-white hover:text-white/80 transition-colors"
             >
               Testimonials
             </Link>
-          </nav>
+          </div>
           <div className="flex items-center gap-4">
             <Link href="/login">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="lg" className="text-black border-black hover:bg-white/90">
                 Log In
               </Button>
             </Link>
             <Link href="/signup">
-              <Button size="sm">Sign Up</Button>
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Sign Up
+              </Button>
             </Link>
           </div>
         </div>
@@ -85,10 +87,10 @@ export default function Home() {
                 </div>
               </div>
               <Image
-                src="/placeholder.svg?height=550&width=550"
+                src="/homeimg.jpg"
                 width={550}
                 height={550}
-                alt="Hero"
+                alt="Woman working on laptop"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
               />
             </div>
@@ -221,7 +223,7 @@ export default function Home() {
                   className="group relative overflow-hidden rounded-lg border"
                 >
                   <Image
-                    src={`/placeholder.svg?height=400&width=300&text=Template ${i}`}
+                    src="/template.jpeg"
                     alt={`Template ${i}`}
                     width={300}
                     height={400}
@@ -529,7 +531,13 @@ export default function Home() {
                   className="flex flex-col rounded-lg border bg-background p-6"
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="h-12 w-12 rounded-full bg-muted" />
+                    <Image 
+                      src="/profile.jpeg" 
+                      alt={`${testimonial.name} profile`}
+                      width={48}
+                      height={48}
+                      className="rounded-full"
+                    />
                     <div>
                       <h3 className="text-lg font-bold">{testimonial.name}</h3>
                       <p className="text-sm text-muted-foreground">
